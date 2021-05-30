@@ -17,10 +17,23 @@
 ifeq ($(TARGET_BOARD_PLATFORM), exynos5)
 ifeq ($(TARGET_SLSI_VARIANT), bsp)
 ifeq ($(TARGET_SOC), exynos7870)
+
+ifeq ($(TARGET_USES_OSS_MOBICORE), true)
 exynos7870_dirs := \
-	mobicore \
-	libgatekeeper \
-	libkeymaster \
+	mobicore
+endif
+
+ifeq ($(TARGET_USES_OSS_MOBICORE), true)
+ifeq ($(BOARD_USES_EXYNOS7870_GATEKEEPER), true)
+exynos7870_dirs := \
+	libgatekeeper
+endif
+
+ifeq ($(TARGET_USES_OSS_MOBICORE), true)
+ifeq ($(BOARD_USES_EXYNOS7870_KEYMASTER), true)
+exynos7870_dirs := \
+	libkeymaster
+endif
 
 #ifeq ($(BOARD_BACK_CAMERA_USES_EXTERNAL_CAMERA), true)
 #exynos7870_dirs += \
